@@ -9,7 +9,6 @@ export function Customers({ customers }: { customers: any[] }) {
   const { submitUserMessage, getAIState } = useActions();
 
   return (<div className="grid gap-4 p-4 border rounded-lg bg-white">
-    {JSON.stringify(getAIState())}
     <div className="grid gap-4">
       {customers.map((customer: any, i: number) => <div className="grid gap-1.5" key={`customer_${customer.id}_${i}`}>
         <h3 className="font-semibold">{customer.name}</h3>

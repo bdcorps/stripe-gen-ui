@@ -223,16 +223,18 @@ export const AI = createAI({
 });
 
 const getStripeCustomers = async (noOfCustomers: number, startsWith: string) => {
-  const customers = await stripe.customers.list({ limit: noOfCustomers })
+  console.log("user asked for ", noOfCustomers, "customers and they should start with ", startsWith)
+  const customers = await stripe.customers.list()
   const customersData = customers.data
 
-  const result = customersData.filter((customer) => customer.email?.startsWith(startsWith))
+  const result = customersData.filter((customer) => customer.email?.startsWith(startsWith)).slice(0, noOfCustomers)
 
   return result
 }
 
 
 const getStripeProducts = async (noOfProducts: number, minPrice: number, maxPrice: number) => {
+  console.log("user asked for ", noOfProducts, "products and they should be more than ", minPrice, "and less than ", maxPrice)
   const products = await stripe.products.list({ limit: noOfProducts, expand: ["data.default_price"] })
   const productsData = products.data
 
